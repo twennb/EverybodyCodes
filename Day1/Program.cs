@@ -1,5 +1,6 @@
 ﻿public class Program()
 {
+    #region Day One
     // get my names and directions strings from the challenge
     private static string _inputNames = "Drethadir,Sarnketh,Torwyris,Qyraidris,Maralzorin,Shaemjorath," +
         "Xyrorath,Zorxelor,Thalxelor,Cynderirin";
@@ -12,11 +13,21 @@
     // a counter for how many steps we take from the first array item to hit our target
     //  after taking all directions into account
     private static int endSteps = 0;
+    #endregion
 
+    #region Day Two
+
+    #endregion
     static void Main(string[] args)
     {
+        DayOnePartOne();
+        DayOnePartTwo();
+    }
+
+    private static void DayOnePartOne()
+    {
         // go through all directions in the array
-       foreach (string direction in _directionList)
+        foreach (string direction in _directionList)
         {
             // directions start with L or R, L = subtract, R = add
             if (direction.Contains('L'))
@@ -60,5 +71,10 @@
         // print out the name at the final position, we need to do -1 because the
         //  array index will be one behind the actual count.
         Console.WriteLine(_nameList[endSteps - 1]);
+    }
+
+    private static void DayOnePartTwo()
+    {
+
     }
 }
