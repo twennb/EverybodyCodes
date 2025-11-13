@@ -1,6 +1,6 @@
 ﻿public class Program()
 {
-    #region Day One
+    #region Part 1
     // get my names and directions strings from the challenge
     private static string _inputNames = "Drethadir,Sarnketh,Torwyris,Qyraidris,Maralzorin," +
         "Shaemjorath,Xyrorath,Zorxelor,Thalxelor,Cynderirin";
@@ -15,7 +15,7 @@
     private static int _endSteps = 0;
     #endregion
 
-    #region Day Two
+    #region Part 2
     private static string _dayTwoInputNames = "Fyndmir,Ascalphor,Aeorris,Anorkris,Urithmyr," +
         "Ilmarhynd,Zynkyris,Braeacris,Havjorath,Marroth,Aureketh,Urithdaros,Urithmirath," +
         "Xandravor,Aeorpyr,Dorimar,Cynderural,Vornfeth,Nysssyron,Brylquin";
@@ -30,10 +30,27 @@
 
     private static int _dayTwoSteps = 0;
     #endregion
+
+    #region Part 3
+    private static string _dayThreeInputNames = "Wyrcyth,Mortor,Ildzyth,Aznarel,Xyrtor,Narsar," +
+        "Shaemfelix,Ozanzeth,Tarldax,Dorvor,Kharnyn,Silzryn,Nyaris,Axalindor,Maralsyx,Eltmyr," +
+        "Rynmirath,Gorathulth,Jardin,Jorathonar,Malath,Tyroryn,Tyrvoran,Zraallar,Selthar,Igngarath," +
+        "Mariral,Aelitheldrith,Thyrosvoran,Thymther";
+    private static string _dayThreeInputDirections = "L8,R34,L37,R37,L25,R20,L47,R10,L22,R6,L35," +
+        "R45,L20,R26,L36,R32,L14,R25,L24,R45,L5,R24,L5,R36,L5,R28,L5,R19,L5,R46,L5,R16,L5,R33,L5," +
+        "R25,L5,R6,L5,R38,L21,R43,L9,R10,L27,R22,L6,R27,L13,R12,L24,R44,L5,R38,L5,R44,L30,R48,L28";
+    
+    private static string[] _dayThreeNames = _dayThreeInputNames.Split(',');
+    private static string[] _dayThreeDirections = _dayThreeInputDirections.Split(',');
+
+    private static int _dayThreeSteps = 0;
+    #endregion
+    
     static void Main(string[] args)
     {
         DayOnePartOne();
         DayOnePartTwo();
+        DayOnePartThree();
 
         //Console.WriteLine(plus(0, 20, 0, _dayTwoNames.Length - 1));
     }
@@ -121,5 +138,51 @@
         // index = (index + rangeLength - decrementAmount) % rangeLength
         Console.WriteLine($"Correct steps to take are: {_dayTwoSteps}," +
             $"and correct answer is {_dayTwoNames[Math.Abs(_dayTwoSteps) % 20]}");
-    } 
+    }
+
+    private static void DayOnePartThree()
+    {
+        int indexToSwap;
+        string previousZero;
+        string newZero;
+
+        foreach (string direction in _dayThreeDirections)
+        {
+            if (direction.Contains('L'))
+            {
+                string newString = direction.Replace("L", "");
+                int stepsBack = int.Parse(newString);
+
+                // this time we don't count all steps for a final move
+                // we have to swap the elements in the target index with
+                // whatever is in [0] every individual direction.
+                // calculate which index is getting swapped
+                indexToSwap = _dayThreeNames.Length - stepsBack;
+
+                // save the two indicies 
+                previousZero = _dayThreeNames[0];
+                newZero = _dayThreeNames[indexToSwap];
+
+                // reassign the relevant spaces with the swapped elements
+                _dayThreeNames[0] = newZero;
+                _dayThreeNames[indexToSwap] = previousZero;
+
+            }
+            if (direction.Contains('R')) // same as above but counting forwards
+            {
+                string newString = direction.Replace("R", "");
+                int stepsForward = int.Parse(newString);
+                // lets try ignoring overflowing the array size, hope no movement that large
+                indexToSwap = stepsForward;
+
+                previousZero = _dayThreeNames[0];
+                newZero = _dayThreeNames[indexToSwap];
+
+                _dayThreeNames[0] = newZero;
+                _dayThreeNames[indexToSwap] = previousZero;
+            }
+        }
+
+        Console.WriteLine($"The correct name is {_dayThreeNames[0]}");
+    }
 }
