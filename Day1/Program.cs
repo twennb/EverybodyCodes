@@ -22,6 +22,9 @@
     private static string _dayTwoInputDirections = "L12,R5,L14,R12,L9,R17,L17,R17,L5,R17,L5,R15," +
         "L5,R17,L5,R14,L5,R16,L5,R8,L12,R9,L13,R15,L16,R15,L19,R19,L5";
 
+    //private static string _dayTwoInputNames = "Vyrdax,Drakzyph,Fyrryn,Elarzris";
+    //private static string _dayTwoInputDirections = "R3,L2,R3,L1";
+
     private static string[] _dayTwoNames = _dayTwoInputNames.Split(',');
     private static string[] _dayTwoDirections = _dayTwoInputDirections.Split(',');
 
@@ -87,7 +90,7 @@
     private static void DayOnePartTwo()
     {
         // similar start to Part One
-        foreach (string direction in _directionList)
+        foreach (string direction in _dayTwoDirections)
         {
             // directions start with L or R, L = subtract, R = add
             if (direction.Contains('L'))
@@ -116,13 +119,7 @@
         // second step = second to last item
         // third step = third to last item
         // index = (index + rangeLength - decrementAmount) % rangeLength
-        Console.WriteLine($"Correct index to access is: {0 + _dayTwoNames.Length - Math.Abs(_dayTwoSteps)}," +
-            $"and correct answer is {_dayTwoNames[0 + _dayTwoNames.Length - Math.Abs(_dayTwoSteps)]}");
-    } // oh no its wrong HMMM
-
-    static int plus(int x, int y, int minRange, int maxRange)
-    {
-        int modulus = maxRange - minRange + 1;
-        return (x + y - minRange) % modulus + minRange;
-    }
+        Console.WriteLine($"Correct steps to take are: {_dayTwoSteps}," +
+            $"and correct answer is {_dayTwoNames[Math.Abs(_dayTwoSteps) % 20]}");
+    } 
 }
