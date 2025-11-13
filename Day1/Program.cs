@@ -139,7 +139,7 @@
         // third step = third to last item
         // index = (index + rangeLength - decrementAmount) % rangeLength
         Console.WriteLine($"Correct steps to take are: {_dayTwoSteps}," +
-            $"and correct answer is {_dayTwoNames[Math.Abs(_dayTwoSteps) % 20]}");
+            $"and correct answer is {_dayTwoNames[Math.Abs(_dayTwoSteps) % _dayTwoNames.Length]}");
     }
 
     private static void DayOnePartThree()
