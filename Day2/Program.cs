@@ -64,9 +64,9 @@ public class Program()
         {
             for (int j = 0; j < PointToCheck.GetLength(1); j++)
             {
-                PointToCheck[i,j] = yPositions[j];
+                // I need pen and paper
+                //PointToCheck[i,j] = [xPositions[i], yPositions[j]];
             }
-            PointToCheck[i, 1] = xPositions[i];
         }    
 
         foreach (int i in PointToCheck)
