@@ -11,7 +11,7 @@ public class Program()
      *[X1,Y1] / [X2,Y2] = [X1 / X2, Y1 / Y2]
      */
 
-    static int[] A = [151,57];
+    static int[] A = [25,9];
 
     static int[] R = [0, 0];
 
@@ -57,7 +57,7 @@ public class Program()
         int x1 = x[0], x2 = x[1];
         int y1 = y[0], y2 = y[1];
 
-        R = [ x1 * y1 - x2 * y2, x1 * y2 + x2 * y2 ];
+        R = [ x1 * y1 - x2 * y2, x1 * y2 + x2 * y1 ];
     }
 
     private static void DivideComplex(int[] x, int[] y)
